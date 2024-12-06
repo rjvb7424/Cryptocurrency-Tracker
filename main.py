@@ -66,8 +66,6 @@ def current_crypto_data():
                 comparison[crypto] = "↑"
             elif selected_data[crypto] < previous_data[crypto]:
                 comparison[crypto] = "↓"
-            else:
-                comparison[crypto] = "-"
         else:
             comparison[crypto] = "-"
     previous_data = selected_data
