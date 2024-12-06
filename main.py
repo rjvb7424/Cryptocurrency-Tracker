@@ -56,8 +56,7 @@ def current_crypto_data():
     return selected_data, comparison
 
 root = tk.Tk()
-root.title("Crypto Prices")
-root.geometry("400x300")
+root.title("Cryptocurrency Tracker")
 
 title_label = tk.Label(root, text="Crypto Prices", font=("Helvetica", 24))
 title_label.pack()
@@ -74,15 +73,24 @@ for crypto in ['BTC', 'ETH', 'XRP', 'LTC', 'BCH']:
     label.pack()
     crypto_labels[crypto] = label
 
+empty_label = tk.Label(root, text="--------------------------------")
+empty_label.pack()
+
+info_label = tk.Label(root, text="Prices are updated every minute.")
+info_label.pack()
+
 def update_prices():
     selected_data, comparison = current_crypto_data()
 
     for crypto in selected_data:
-        crypto_labels[crypto].config(text=f"{crypto}: ${selected_data[crypto]} {comparison[crypto]}")
+        if comparison[crypto] == "↑":
+            crypto_labels[crypto].config(text=f"{comparison[crypto]} {crypto}: ${selected_data[crypto]}", fg="green")
+        elif comparison[crypto] == "↓":
+            crypto_labels[crypto].config(text=f"{comparison[crypto]} {crypto}: ${selected_data[crypto]}", fg="red")
     current_time = get_current_time()
-    last_updated_label.config(text="Last Updated: {:02d}:{:02d}".format(current_time.tm_hour, current_time.tm_min))
+    last_updated_label.config(text="Last Updated: {:02d}:{:02d}:{:02d}".format(current_time.tm_hour, current_time.tm_min, current_time.tm_sec))
 
-    root.after(100000, update_prices)  
+    root.after(300000, update_prices)  
 update_prices()
 
 root.mainloop()
