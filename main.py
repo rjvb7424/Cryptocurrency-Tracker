@@ -1,5 +1,6 @@
 import requests
 import tkinter as tk
+import time
 
 url = "http://api.coinlayer.com/"
 api_key = "9c34686dbd6c309b03fa6cc0c6399dc2"
@@ -26,7 +27,12 @@ root.title("Crypto Prices")
 root.geometry("400x200")
 title_label = tk.Label(root, text="Crypto Prices", font=("Helvetica", 24))
 title_label.pack()
-empty_lable = tk.Label(root, text="")
+
+current_time = time.localtime()
+last_updated_label = tk.Label(root, text="Last Updated: {:02d}:{:02d}".format(current_time.tm_hour, current_time.tm_min))
+last_updated_label.pack()
+
+empty_lable = tk.Label(root, text="--------------------------------")
 empty_lable.pack()
 
 crypto_data = get_crypto_data()
