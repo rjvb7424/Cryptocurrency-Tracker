@@ -24,6 +24,10 @@ def select_crypto_data(organized_data):
 root = tk.Tk()
 root.title("Crypto Prices")
 root.geometry("400x200")
+title_label = tk.Label(root, text="Crypto Prices", font=("Helvetica", 24))
+title_label.pack()
+empty_lable = tk.Label(root, text="")
+empty_lable.pack()
 
 crypto_data = get_crypto_data()
 organized_data = organize_crypto_data(crypto_data)
